@@ -1,0 +1,33 @@
+//fk=fk-1 + fk-2
+//O(n)
+#include <iostream>
+using namespace std;
+#include<bits/stdc++.h>
+int dp[100000000];
+int fib(int n);
+int main() {
+    int t=0, n=0;
+    int ris=0;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        memset(dp, -1, sizeof(dp));
+        ris=fib(n);
+        cout << ris << "\n";
+    }
+	return 0;
+}
+
+int fib(int n){
+    if(n<=1){
+        return 1;
+    }
+    int first, second;
+    if(dp[n-1]!=-1) first=dp[n-1];
+    else first =fib(n-1);
+    
+    if(dp[n-2]!=-1) second=dp[n-2];
+    else second = fib(n-2);
+    //memoization
+    return dp[n]=first+second;
+}

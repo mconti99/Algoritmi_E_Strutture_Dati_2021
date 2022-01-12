@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int solve(const vector<vector<int>>& mat, int posx, int posy, map<pair<int,int>, int>& dp){
+	if(dp.find({posx, posy}) != dp.end())
+		return dp[{posx,posy}];
+
+	if(posy == mat[0].size()-1)
+		return dp[{posx,posy}] = 0;
+
+	return dp[{posx,posy}] = min({ 
+		mat[(posx-1)%(mat.size())][posy+1] +solve(mat, (posx-1)%(mat.size()), posy+1, dp) , 
+		mat[(posx)%(mat.size())][posy+1] + solve(mat, (posx)%(mat.size()), posy+1, dp) ,
+		mat[(posx+1)%(mat.size())][posy+1] + solve(mat, (posx+1)%(mat.size()), posy+1, dp) });
+}
+
+int main(){
+	int n,m;
+	cin >> n >> m;
+	vector<vector<int>> mat(n, vector<int>(m));
+
+	for(int i=0;i<n;i++)
+		for(int j=0;j<m;j++)
+			cin >> mat[i][j];
+	
+	map<pair<int,int>, int> dp;
+	
+	int res = INT_MAX;
+	for(int i=0;i<n;i++)
+		res = min(res, solve(mat, i, 0, dp) + mat[i][0]);
+
+	cout << res << endl;
+
+	system("pause");
+}

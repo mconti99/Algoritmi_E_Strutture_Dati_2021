@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+long long int binomialCoefficients(long long int, long long int);
+int main() {
+    long long int tc=0;
+    long long int n=0;
+    long long int k=0;
+    long long int r=0;
+    long long int v[100];
+    long long int cont=0;
+    cin>>tc; //numero test case
+    for(int t=0;t<tc;t++){
+        cin>>n;
+        cin>>k;
+        for(int j=0;j<n;j++){
+            cin>>v[j];
+        }
+        //INSERTION SORT
+        for (int j=1; j<n; j++){
+            long long int key = v[j];
+// Insert A[j] into A[1..j-1]
+            long long int z = j-1;
+            while (z>=0 && v[z]>key){
+                v[z+1] = v[z];
+                z--;
+            }
+        v[z+1] = key;
+        }
+        
+        //conto le occorrenze del k-esimo elemento
+        for(int i=0;i<n;i++){
+            if(v[k-1]==v[i]) cont++;
+        }
+        bool trovato=false;
+        long long int i=0;
+        long long int den=0;
+        //voglio trovare quanti k-esimi elementi mi servono per completare la sottosequenza
+        while(!trovato){
+            if(v[i]==v[k-1]){
+                den=k-i;
+                trovato=true;
+            } 
+            else{
+                i++;
+            } 
+        }
+        r=binomialCoefficients(cont, den);
+        cout << r << endl;
+        
+ 
+    }
+	return 0;
+}
+
+long long int binomialCoefficients(long long int n, long long int k) {
+   if (k == 0 || k == n) return 1;
+   return binomialCoefficients(n - 1, k - 1) + binomialCoefficients(n - 1, k);
+}

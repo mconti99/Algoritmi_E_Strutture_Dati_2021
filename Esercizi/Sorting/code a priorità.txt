@@ -1,0 +1,30 @@
+Heap-Increase-Key(A, i, key)
+// Input: A: an array representing a heap, i: an array index, key: a new key greater than A[i]
+// Output: A still representing a heap where the key of A[i] was increased to key
+// Running Time: O(log n) where n =heap-size[A]
+1 if key < A[i]
+2 error(“New key must be larger than current key”)
+3 A[i] ← key
+4 while i > 1 and A[Parent(i)] < A[i]
+5 exchange A[i] and A[Parent(i)]
+6 i ← Parent(i)
+
+
+Heap-Extract-Max(A)
+// Input: A: an array representing a heap
+// Output: The maximum element of A and A as a heap with this element removed
+// Running Time: O(log n) where n =heap-size[A]
+1 max ← A[1]
+2 A[1] ← A[heap-size[A]]
+3 heap-size[A] ←heap-size[A] − 1
+4 Max-Heapify(A, 1)
+5 return max
+
+
+Max-Heap-Insert(A, key)
+// Input: A: an array representing a heap, key: a key to insert
+// Output: A modified to include key
+// Running Time: O(log n) where n =heap-size[A]
+1 heap-size[A] ←heap-size[A] + 1
+2 A[heap-size[A]] ← −∞
+3 Heap-Increase-Key(A[heap-size[A]], key)

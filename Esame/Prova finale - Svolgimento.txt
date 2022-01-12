@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isPalindrome(string S){
+    string P = S;
+    reverse(P.begin(), P.end());
+ 
+    if(S == P){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+int main() {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    int t=0;
+    string s;
+    string s_reversed;
+    int mat[1001][1001];
+    int n=0;
+    cin>>t;
+    while(t--){
+        memset(mat,0,sizeof(mat));//inizializzo la matrice con tutti 0 per ogni test case
+        cin>>s;
+        n=s.length();
+        if(isPalindrome(s)) cout << n << "\n";
+        else{
+            string s_reversed = s;
+            reverse(s_reversed.begin(), s_reversed.end());
+        
+            for(int i=1;i<=n;i++){
+			    for(int j=1;j<=n;j++)
+				    if(s[i-1]==s_reversed[j-1])
+					    mat[i][j]=mat[i-1][j-1]+1;
+				    else
+					    mat[i][j]=max(mat[i-1][j],mat[i][j-1]);
+		    }
+		    cout << mat[n][n] << "\n";
+        }
+    }
+
+	return 0;
+}
+
+
+Complessità temporale dell’algoritmo implementato: O(n^2)

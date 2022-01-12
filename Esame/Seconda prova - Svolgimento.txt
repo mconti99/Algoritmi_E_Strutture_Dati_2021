@@ -1,0 +1,38 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int solve(string s1, string s2, map<pair<int,int>, int>& dp, int pos1, int pos2){
+    int m=s1.size();
+    int n=s2.size();
+    if(dp.find({pos1, pos2})!=dp.end()) return dp[{pos1,pos2}];
+    
+    if(pos1==m && pos2==n) return dp[{pos1,pos2}]=0;
+    
+    if(pos1==m) return dp[{pos1,pos2}]=solve(s1,s2,dp,pos1,pos2+1);
+    
+    if(pos2==n) return dp[{pos1,pos2}]=solve(s1,s2,dp,pos1+1, pos2);
+
+    if(s1[pos1] ==s2[pos2]) return 1 + solve(s1, s2, dp, pos1+1, pos2+1);
+    
+    return dp[{pos1,pos2}] = max(solve(s1,s2,dp,pos1+1,pos2), solve(s1,s2,dp, pos1, pos2+1));
+}
+
+int main() {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    
+    string s1,s2;
+    int cont=0;
+    while(getline(cin,s1)){
+        if(s1=="#") break;
+        getline(cin,s2);
+        cont++;
+        map<pair<int,int>, int> dp;
+        cout << "Caso #" << cont << ": numero massimo = " << solve(s1,s2, dp, 0, 0) << "\n";
+    }
+    
+    return 0;
+}
+
+Complessità temporale dell’algoritmo implementato: O(|s1|*|s2|)

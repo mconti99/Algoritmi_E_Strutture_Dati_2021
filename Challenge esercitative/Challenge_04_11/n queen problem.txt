@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+using namespace std;
+typedef struct{
+    int x;
+    int y;
+}queen;
+
+void printChessBoard(vector<queen>& sol, const int N){
+    vector<vector<char>> b(N, vector<char>(N,'-'));//da rivedere
+    for(auto x : sol){
+        b[x.x][x.y] = 'Q'; 
+    }
+    if(N==0) return;
+    for(int i=0;i<N;i++){
+        for(int j=0;j<N;j++){
+            cout << b[i][j] << '\t';
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+bool valid(vector<queen>& sol){
+    for(int i=0;i<sol.size();i++){
+        for(int j=i+1;j<sol.size();j++){
+            if(sol[i].x==sol[j].x) return false;
+            if(sol[i].y==sol[j].y) return false;
+            if(abs(sol[i].x-sol[j].x)==abs(sol[i].y-sol[j].y)) return false;
+        }
+    }
+    return true;
+}
+bool complete(vector<queen> & sol, const int N){
+    if(sol.size()==N) return true;
+    return false;
+}
+void backtrack(vector<queen>& sol, int& counter, const int N){
+    if(!valid(sol)){
+        return; //la funzione si chiude
+    }
+    
+    if(complete(sol, N)){
+        counter++;
+        printChessBoard(sol, N);
+        return;
+    }
+    for(int i=0;i<N;i++){
+        queen temp;
+        temp.x=i;
+        temp.y=sol.size();//ne posso avere una per riga
+        sol.push_back(temp);
+        backtrack(sol, counter, N);
+        sol.pop_back();
+    }
+}
+
+int main() {
+    int N=0;
+    cin>>N;
+    vector<queen> sol;
+    int counter=0;
+    backtrack(sol, counter, N);
+    if(N==0 || counter ==0) cout <<  "Not Possible" << "\n";
+	return 0;
+}

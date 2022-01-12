@@ -1,0 +1,26 @@
+#include <iostream>
+#include <cmath>
+#include <bits/stdc++.h>
+using namespace std;
+int solve(int value, int pos, const vector<int>& coins, vector<vector<int>>& dp){
+    if(value<0) return 0;
+    if(value==0) return 1;
+    if(pos>=5) return 0;
+    if(dp[value][pos]!=-1) return dp[value][pos];
+    
+    int tot=solve(value-coins[pos], pos, coins, dp) + solve(value, pos+1, coins, dp);
+    return dp[value][pos]=tot;
+    
+}
+int main() {
+    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    int x=0;
+    vector<int> coins = {50,25, 10, 5, 1};
+    while(cin>>x){
+        vector<vector<int>> dp(x+1, vector<int>(5, -1));
+        cout << solve(x, 0, coins, dp) << "\n";
+    }
+    
+    return 0;
+}

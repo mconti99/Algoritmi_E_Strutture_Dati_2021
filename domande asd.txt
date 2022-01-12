@@ -1,0 +1,20 @@
+hw di verifica
+mediana, randomized select
+prove
+heapsort, proprietà dell'heap, applicazione dell'heap
+algoritmo di bellman-ford, complessità
+ricorrenza caso peggiore quick sort, complessità del quicksort randomizzato nel caso peggiore
+ordinamento a confronti, qual è il limite inferiore e perchè? perchè non si usano gli algoritmi lineari? DIMOSTRAZIONE
+impostazione di base del backtracking, pseudocodice? parte che verifica i vincoli? è una forza bruta pura?
+cos'è un metodo euristico?
+hashing universale
+splay tree
+problema NP, che vuol dire NP-complete
+merge-sort parallelo
+bucket sort, quanti sottointervalli, analisi del tempo di esecuzione DIMOSTRAZIONE
+radix sort pseudocodice, perchè ho bisogno di un algoritmo stabile?
+complessità pseudo-polinomiale
+cosa vuol dire che un problema ha una sottostruttura ottima? a che serve?
+indirizzamento aperto, come si fa search, delete e insert? quando conviene l'indirizzamento aperto?
+merge parallelo
+quando conviene usare il counting sort in generale? 
